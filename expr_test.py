@@ -3,7 +3,6 @@ Test cases for PyEval
 
 Jon Fincher, July 2018
 '''
-import os
 import unittest
 from pyeval_expression import Expression
 
@@ -76,7 +75,7 @@ class TestPyEval(unittest.TestCase):
         self.assertEqual("53 2 37 + + ", expr.result(), "ERROR: Pre/post/in-fixed whitespace expression")
         expr = Expression("  53  +  2  +  37  ")
         self.assertEqual("53 2 37 + + ", expr.result(), "ERROR: Multiple whitespace expression")
-        # This test should fail - spaces in between operands should give an error
+        # This test should throw an exception - spaces in between operands should give an error
         with self.assertRaises(SyntaxError):
             expr = Expression("  53  +  -  2  +  37  ")
             expr.parse()
