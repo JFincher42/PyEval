@@ -9,23 +9,28 @@ from pyeval_expression import Expression
 class TestPyEval(unittest.TestCase):
 
     '''
-    test_positive_operand_expression - tests a correct result from a single positive operand expression
+    Validation of Expression and Operator classes.
+    No setup function is needed
     '''
+
     def test_positive_operand_expression(self):
+        '''
+        Tests a single positive operand expression
+        '''
         expr = Expression("53")
         self.assertEqual("53 ", expr.result(), "ERROR: Positive operand")
 
-    '''
-    test_negative_operand_expression - tests a correct result from a single negative operand expression
-    '''
     def test_negative_operand_expression(self):
+        '''
+        Tests a single negative operand expression
+        '''
         expr = Expression("-53")
         self.assertEqual("-53 ", expr.result(), "ERROR: Negative operand")
 
-    '''
-    test_double_term_expression - tests a correct result from a set of double term expressions
-    '''
     def test_double_term_expression(self):
+        '''
+        Tests a set of double term expressions
+        '''
         expr = Expression("53+2")
         self.assertEqual("53 2 + ", expr.result(), "ERROR: Double positive term expression")
         expr = Expression("-53+2")
@@ -35,10 +40,10 @@ class TestPyEval(unittest.TestCase):
         expr = Expression("-53+-2")
         self.assertEqual("-53 -2 + ", expr.result(), "ERROR: Double negative term expression")
 
-    '''
-    test_double_term_operands - tests a correct result from a set of operands
-    '''
     def test_double_term_operands(self):
+        '''
+        Tests a set of operands
+        '''
         expr = Expression("53+2")
         self.assertEqual("53 2 + ", expr.result(), "ERROR: Additive expression")
         expr = Expression("53-2")
@@ -48,10 +53,10 @@ class TestPyEval(unittest.TestCase):
         expr = Expression("53/2")
         self.assertEqual("53 2 / ", expr.result(), "ERROR: Divide expression")
 
-    '''
-    test_triple_term_expression - tests a correct result from a set of triple term expressions
-    '''
     def test_triple_term_expression(self):
+        '''
+        Tests a set of triple term expressions
+        '''
         expr = Expression("53+2+37")
         self.assertEqual("53 2 37 + + ", expr.result(), "ERROR: Add/Add expression")
         expr = Expression("53+2*37")
@@ -61,10 +66,10 @@ class TestPyEval(unittest.TestCase):
         expr = Expression("53*2*37")
         self.assertEqual("53 2 37 * * ", expr.result(), "ERROR: Multiply/Multiply expression")
 
-    '''
-    test_whitespace_expression - tests a correct result from a variety of whitespace
-    '''
     def test_whitespace_expression(self):
+        '''
+        Tests a set of expressions with a variety of whitespace
+        '''
         expr = Expression("53+2+37")
         self.assertEqual("53 2 37 + + ", expr.result(), "ERROR: No whitespace expression")
         expr = Expression("53 + 2 + 37")
@@ -75,8 +80,8 @@ class TestPyEval(unittest.TestCase):
         self.assertEqual("53 2 37 + + ", expr.result(), "ERROR: Pre/post/in-fixed whitespace expression")
         expr = Expression("  53  +  2  +  37  ")
         self.assertEqual("53 2 37 + + ", expr.result(), "ERROR: Multiple whitespace expression")
+        
         # This test should throw an exception - spaces in between operands should give an error
         with self.assertRaises(SyntaxError):
             expr = Expression("  53  +  -  2  +  37  ")
             expr.parse()
-
