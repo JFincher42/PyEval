@@ -16,7 +16,7 @@ class TestPyEval(unittest.TestCase):
         self.assertEqual("53 ", expr.result(), "ERROR: Positive operand")
 
     '''
-    test_megative_operand_expression - tests a correct result from a single negative operand expression
+    test_negative_operand_expression - tests a correct result from a single negative operand expression
     '''
     def test_negative_operand_expression(self):
         expr = Expression("-53")
